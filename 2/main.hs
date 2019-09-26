@@ -1,4 +1,14 @@
-import MyHashMap
+import MyHashMapModule
+import Data.Array
 
-main = 
-	print ()
+main :: IO ()
+main = do
+    let a = MyHashMap myHashMapSize (listArray (0,myHashMapSize) (repeat []))
+        a1 = insert a "a" "A"
+        a2 = insert a1 "b" "B"
+        a25 =remove a2 "b"
+        a3 = insert a25 "C" "B"
+    print $ myHash "c"
+    print $ find a3 "a"
+    print $ myFold (++) "" a3
+    print $ myMap lowerString a3
