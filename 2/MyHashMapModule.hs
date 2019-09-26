@@ -1,8 +1,8 @@
-module MyHashMapModule where
+-- module MyHashMapModule where
 import Data.Monoid
 import Data.Bits
 import Data.Array
-import Data.Char (ord)
+import Data.Char
 
 type ElementType = String
 type KeyType = String
@@ -54,6 +54,13 @@ remove hm k = hm'
               xs -> MyHashMap (len hm) ((elemts hm) // [((myHash $ k), filter (\(MyHashMapElement bucketKey value) -> bucketKey /= k) xs )])
         bucket = (elemts hm) ! (myHash $ k)
 
+myFold :: (b -> ElementType -> b) -> b -> MyHashMap -> b
+myFold f b hm = foldl f b ( map value ( foldl (++) [] (elems(elemts hm)) ))
+
+myMap :: (ElementType -> b) -> MyHashMap -> [b]
+myMap f hm = map f ( map value ( foldl (++) [] (elems(elemts hm)) ))
+
+lowerString str = [ toLower loweredString | loweredString <- str]
 
 main :: IO ()
 main = do
@@ -64,9 +71,11 @@ main = do
         a = MyHashMap myHashMapSize (listArray (0,myHashMapSize) (repeat []))
         a1 = insertWithKey a e1
         a2 = insertWithKey a1 e2
-        a25 =remove a2 "a"
+        a25 =remove a2 "b"
         a3 = insertWithKey a25 e3
     print $ value (( (elemts a3) ! myHash "c") !! 0 )
     print $ myHash "c"
     print $ find a3 "a"
+    print $ myFold (++) "" a3
+    print $ myMap lowerString a3
      
