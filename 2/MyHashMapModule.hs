@@ -19,7 +19,7 @@ data MyHashMap k v = MyHashMap {
     len :: Int,
     elemts :: Array Int (MyHashMapBucket k v)
 } 
-
+--  deriving (Show, Eq)
 
 insertWithKey :: (Eq a, Hashable a) => MyHashMap a b -> MyHashMapElement a b -> MyHashMap a b
 insertWithKey hm e = MyHashMap (len hm) $ (elemts hm) // [((myHash $ key e), ((elemts hm) ! (myHash $ key e)) ++ [e])]

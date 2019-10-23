@@ -97,8 +97,5 @@ lineToPoint line = (x, y)
         y = read $ splitedLine !! 1 :: Double
         splitedLine = splitOn ";" line
 
--- findSubstring :: Eq a => [a] -> [a] -> Maybe Int
--- findSubstring pat str = findIndex (isPrefixOf pat) (tails str) 
-
 maybeIndex n x  | n < length x = Just (x !! n)
                 | otherwise = Nothing
