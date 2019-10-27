@@ -1,0 +1,44 @@
+Q start echo "e to ask following action"
+Q s1 sleep 1; echo "go to 1st flor and open"
+Q s2 sleep 1; echo "go to 2st flor"
+Q s2o echo "open dor on 2st flor"
+Q s3 sleep 1; echo "go to 3st flor"
+Q s3o echo "open dor on 3st flor"
+Q s4 sleep 1; echo "go to 4st flor"
+Q s4o echo "open dor on 4st flor"
+Q n echo "do nothing"
+start s1 E
+# en - call on n flor
+s1 s2o e2
+s1 s3o e3
+s1 s4o e4
+n s2o e2
+n s3o e3
+n s4o e4
+# e - timer tic - for flow
+s4o s3 e
+s3o s2 e
+s2o s1 e
+s4 s3 e
+s3 s2 e
+s2 s1 e
+s1 n e
+n n e
+# open dors to cach
+s4 s4o e4
+s3 s3o e3
+s4 s3o e3
+s2 s2o e2
+s3 s2o e2
+s4 s2o e2
+# close dors after cach
+s4o s3 e4
+s3o s2 e3
+s2o s1 e2
+# ignore upper people (in another case make 4^4 new states)
+s3 s2 e4
+s2 s1 e4
+s2 s1 e3
+s3o s2 e4
+s2o s2 e4
+s2o s1 e3

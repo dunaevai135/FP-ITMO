@@ -1,0 +1,3 @@
+digraph sm {
+	"s1" -> "s2" [label="e1"];
+}
